@@ -1,0 +1,5 @@
+include meals/schema.sql
+graft meals/static
+graft meals/templates
+graft tests
+global-exclude *.pyc
