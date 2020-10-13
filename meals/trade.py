@@ -19,18 +19,18 @@ def index():
 
 
 @bp.route("/buy", methods=("GET",))
-@login_required
+#@login_required
 def buy():
     """Shows all meal swipes that are available to buy"""
-    db = get_db()
-    posts = db.execute(
-        # todo: make query
-    ).fetchall()
-    return render_template("trade/buy.html", posts=posts)
+    # db = get_db()
+    # posts = db.execute(
+    #     # todo: make query
+    # ).fetchall()
+    return render_template("trade/buy.html")
 
 
 @bp.route("/sell", methods=("GET", "POST"))
-@login_required
+#@login_required
 def sell():
     # if the form is submitted, process it
     if request.method == "POST":
