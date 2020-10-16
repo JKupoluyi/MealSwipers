@@ -67,7 +67,6 @@ def register():
             is not None
         ):
             error = "User {0} is already registered.".format(username)
-
         if error is None:
             # the name is available, store it in the database and go to
             # the login page
@@ -79,7 +78,6 @@ def register():
             return redirect(url_for("auth.login"))
 
         flash(error)
-
     return render_template("auth/register.html")
 
 
@@ -104,7 +102,7 @@ def login():
             # store the user id in a new session and return to the index
             session.clear()
             session["user_id"] = user["id"]
-            return redirect(url_for("index"))
+            return redirect(url_for("trade.buy"))
 
         flash(error)
 
@@ -116,3 +114,7 @@ def logout():
     """Clear the current session, including the stored user id."""
     session.clear()
     return redirect(url_for("index"))
+
+
+
+

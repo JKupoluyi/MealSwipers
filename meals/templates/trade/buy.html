@@ -230,6 +230,7 @@ $(document).ready(function(){
                     </div>
                 </div>
             </div>
+            
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -242,17 +243,22 @@ $(document).ready(function(){
                     </tr>
                 </thead>
                 <tbody>
+                {% block content %}
+                    {% for swipe in meal_swipe %}
                     <tr>
-                        <td>1</td>
-                        <td><a href="#"><img src="{{url_for('static', filename='avatar50.png')}}" class="avatar" alt="Avatar"> Yuurrrr </a></td>
-                        <td>04/10/2013</td>                        
-                        <td>$5.00</td>
+                        <td>{{ swipe['id']}}</td>
+                        <td><a href="#"><img src="{{url_for('static', filename='avatar50.png')}}" class="avatar" alt="Avatar"> {{ post['username'] }} </a></td>
+                        <td>{{ swipe['timestamp_sell'].strftime('%Y-%m-%d') }}</td>                        
+                        <td>{{ swipe['price']}}</td>
                         <td><span class="status text-success">&bull;</span> Active</td>
                         <td>
                             <a href="#" class="buy" title="Buy" data-toggle="tooltip"> <i class='fas fa-cart-arrow-down' style='font-size:26px;'></i></a>
                         </td>
                     </tr>
-                    <tr>
+                    {% endfor %}
+                {% endblock %}
+
+                   <tr>
                         <td>2</td>
                         <td><a href="#"><img src="{{url_for('static', filename='avatar50.png')}}" class="avatar" alt="Avatar"> Yuurrrr</a></td>
                         <td>05/08/2014</td>                       
@@ -262,7 +268,7 @@ $(document).ready(function(){
                             <a href="#" class="buy" title="Buy" data-toggle="tooltip"> <i class='fas fa-cart-arrow-down' style='font-size:26px;'></i></a>
                         </td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <td>3</td>
                         <td><a href="#"><img src="{{url_for('static', filename='avatar50.png')}}" class="avatar" > Yuurrrr</a></td>
                         <td>11/05/2015</td>
@@ -301,7 +307,7 @@ $(document).ready(function(){
                         <td>
                             <a href="#" class="buy" title="Buy" data-toggle="tooltip"> <i class='fas fa-cart-arrow-down' style='font-size:26px;'></i></a>
                         </td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
             <div class="clearfix">
@@ -321,3 +327,4 @@ $(document).ready(function(){
 </div>     
 </body>
 </html>
+

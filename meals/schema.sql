@@ -2,16 +2,21 @@
 -- Drop any existing data and create empty tables.
 
 DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS post;
 DROP TABLE IF EXISTS meal_swipe;
 DROP TABLE IF EXISTS message;
 DROP TABLE IF EXISTS review;
 
 CREATE TABLE user (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  /*id INTEGER PRIMARY KEY AUTOINCREMENT,
   email TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
   name TEXT NOT NULL,
-  payment_info TEXT
+  payment_info TEXT*/
+
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL
 );
 
 CREATE TABLE meal_swipe (
@@ -50,4 +55,13 @@ CREATE TABLE message (
   FOREIGN KEY (seller_id) REFERENCES user (id),
   FOREIGN KEY (buyer_id) REFERENCES user (id),
   FOREIGN KEY (swipe_id) REFERENCES meal_swipe (id)
+);
+
+CREATE TABLE post (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  author_id INTEGER NOT NULL,
+  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  title TEXT NOT NULL,
+  body TEXT NOT NULL,
+  FOREIGN KEY (author_id) REFERENCES user (id)
 );
