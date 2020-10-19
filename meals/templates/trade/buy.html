@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="style.css" rel="stylesheet">
+<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
 <title>MealSwipers - Buy Page</title>
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round"> -->
 <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
@@ -225,8 +225,8 @@ $(document).ready(function(){
                         <h2>Available Swipes</h2>
                     </div>
                     <div class="col-sm-7">
-                        <a href="#" class="btn btn-secondary"><i class="material-icons" style='font-size: 26px;' >&#xe982;</i> <span style='font-size: 15px;'>Sell</span></a>
-                        <a href="#" class="btn btn-secondary"><i class='fas fa-cart-arrow-down' style='font-size: 26px;' ></i> <span style='font-size: 15px;' >Buy</span></a>						
+                        <a href="{{url_for('trade.sell')}}" class="btn btn-secondary"><i class="material-icons" style='font-size: 26px;' >&#xe982;</i> <span style='font-size: 15px;'>Sell</span></a>
+                        <a href="{{url_for('trade.buy')}}" class="btn btn-secondary"><i class='fas fa-cart-arrow-down' style='font-size: 26px;' ></i> <span style='font-size: 15px;' >Buy</span></a>						
                     </div>
                 </div>
             </div>
@@ -244,10 +244,10 @@ $(document).ready(function(){
                 </thead>
                 <tbody>
                 {% block content %}
-                    {% for swipe in meal_swipe %}
+                    {% for swipe in posts %}
                     <tr>
                         <td>{{ swipe['id']}}</td>
-                        <td><a href="#"><img src="{{url_for('static', filename='avatar50.png')}}" class="avatar" alt="Avatar"> {{ post['username'] }} </a></td>
+                        <td><a href="#"><img src="{{url_for('static', filename='avatar50.png')}}" class="avatar" alt="Avatar"> {{ swipe['username'] }} </a></td>
                         <td>{{ swipe['timestamp_sell'].strftime('%Y-%m-%d') }}</td>                        
                         <td>{{ swipe['price']}}</td>
                         <td><span class="status text-success">&bull;</span> Active</td>
@@ -257,17 +257,6 @@ $(document).ready(function(){
                     </tr>
                     {% endfor %}
                 {% endblock %}
-
-                   <tr>
-                        <td>2</td>
-                        <td><a href="#"><img src="{{url_for('static', filename='avatar50.png')}}" class="avatar" alt="Avatar"> Yuurrrr</a></td>
-                        <td>05/08/2014</td>                       
-                        <td>$5.00</td>
-                        <td><span class="status text-success">&bull;</span> Active</td>
-                        <td>
-                            <a href="#" class="buy" title="Buy" data-toggle="tooltip"> <i class='fas fa-cart-arrow-down' style='font-size:26px;'></i></a>
-                        </td>
-                    </tr>
                     <!-- <tr>
                         <td>3</td>
                         <td><a href="#"><img src="{{url_for('static', filename='avatar50.png')}}" class="avatar" > Yuurrrr</a></td>

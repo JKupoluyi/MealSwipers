@@ -18,7 +18,7 @@ def index():
     return render_template("trade/index.html")
 
 
-@bp.route("/buy", methods=("GET",))
+@bp.route("/buy")
 #@login_required
 def buy():
     """Shows all meal swipes that are available to buy"""
@@ -26,7 +26,15 @@ def buy():
     # posts = db.execute(
     #     # todo: make query
     # ).fetchall()
-    return render_template("trade/buy.html")
+    """Show all the posts, most recent first."""
+    db = get_db()
+    meal_swipe = db.execute(
+        "SELECT m.id, price, venmo, timestamp_sell, username"
+        " FROM meal_swipe m JOIN user u ON m.seller_id = u.id"
+        " ORDER BY timestamp_sell DESC"
+    ).fetchall()
+    return render_template("trade/buy.html", posts = meal_swipe)
+
 
 
 @bp.route("/sell", methods=("GET", "POST"))
@@ -35,20 +43,23 @@ def sell():
     # if the form is submitted, process it
     if request.method == "POST":
         # todo: change everything within if
-        title = request.form["title"]
-        body = request.form["body"]
+        venmo = request.form["venmo"]
+        price = request.form["price"]
         error = None
 
-        if not title:
-            error = "Title is required."
+        if not price:
+            error = "Price is required."
+        
+        if not venmo:
+            error = "Venmo Username is required."
 
         if error is not None:
             flash(error)
         else:
             db = get_db()
             db.execute(
-                "INSERT INTO post (title, body, author_id) VALUES (?, ?, ?)",
-                (title, body, g.user["id"]),
+                "INSERT INTO meal_swipe (venmo, price, seller_id) VALUES (?, ?, ?)",
+                (venmo, price, g.user["id"]),
             )
             db.commit()
             return redirect(url_for("trade.buy"))

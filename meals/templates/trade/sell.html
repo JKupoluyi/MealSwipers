@@ -7,7 +7,8 @@
 
 <head>
 	<link rel="stylesheet" href="{{ url_for('static', filename='styleSell.css') }}" />
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+		id="bootstrap-css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<meta charset="utf-8">
@@ -21,7 +22,8 @@
 
 	body {
 		font-family: 'Poppins', sans-serif;
-		background-color: white;
+		background-color: #f5f5f5;
+		;
 	}
 
 	.contact {
@@ -117,42 +119,46 @@
 				<div class="contact-form">
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-default">Buy Page</button>
+							<a href="{{url_for('trade.buy')}}"><button type="button" class="btn btn-default">Buy
+									Page</button></a>
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-2" for="fname">Venmo:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="fname" placeholder="Enter Venmo Username"
-								name="fname">
+					{% block content %}
+					<form method="post">
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="venmo">Venmo:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="venmo" placeholder="Enter Venmo Username"
+									name="venmo" value="{{ request.form['venmo'] }}" required>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-2" for="lname">Sell Price:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="lname" placeholder="Enter Sell Price"
-								name="lname">
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="price">Sell Price:</label>
+							<div class="col-sm-10">
+								<input type="number" class="form-control" id="price" placeholder="Enter Sell Price"
+									name="price" value="{{ request.form['price'] }}" required>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-2" for="email">Number:</label>
-						<div class="col-sm-10">
-							<input type="email" class="form-control" id="email" placeholder="Enter number to contact"
-								name="email">
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="number">Contact Number:</label>
+							<div class="col-sm-10">
+								<input type="email" class="form-control" id="number"
+									placeholder="Enter number to contact" name="number">
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-2" for="comment">Note:</label>
-						<div class="col-sm-10">
-							<textarea class="form-control" rows="5" id="comment"></textarea>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="note">Note:</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="5" id="note"></textarea>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-default">Submit</button>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" value="Sace" class="btn btn-default">Submit</button>
+							</div>
 						</div>
-					</div>
-
+					</form>
+					{% endblock %}
 				</div>
 			</div>
 		</div>
@@ -160,4 +166,3 @@
 </body>
 
 </html>
-<!------ Include the above in your HEAD tag ---------->
