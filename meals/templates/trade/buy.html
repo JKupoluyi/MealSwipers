@@ -247,12 +247,12 @@ $(document).ready(function(){
                     {% for swipe in posts %}
                     <tr>
                         <td>{{ swipe['id']}}</td>
-                        <td><a href="#"><img src="{{url_for('static', filename='avatar50.png')}}" class="avatar" alt="Avatar"> {{ swipe['username'] }} </a></td>
+                        <td><a href="{{url_for('review.read', username=swipe['username'])}}"><img src="{{url_for('static', filename='avatar50.png')}}" class="avatar" alt="Avatar"> {{ swipe['username'] }} </a></td>
                         <td>{{ swipe['timestamp_sell'].strftime('%Y-%m-%d') }}</td>                        
-                        <td>{{ swipe['price']}}</td>
+                        <td>${{ swipe['price']}}</td>
                         <td><span class="status text-success">&bull;</span> Active</td>
                         <td>
-                            <a href="#" class="buy" title="Buy" data-toggle="tooltip"> <i class='fas fa-cart-arrow-down' style='font-size:26px;'></i></a>
+                            <a href="{{url_for('trade.view', id=swipe['id'])}}" class="buy" title="Buy" data-toggle="tooltip"> <i class='fas fa-cart-arrow-down' style='font-size:26px;'></i></a>
                         </td>
                     </tr>
                     {% endfor %}

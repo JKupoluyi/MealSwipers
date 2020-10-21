@@ -19,7 +19,7 @@ def index():
 
 
 @bp.route("/buy")
-#@login_required
+@login_required
 def buy():
     """Shows all meal swipes that are available to buy"""
     # db = get_db()
@@ -29,16 +29,18 @@ def buy():
     """Show all the posts, most recent first."""
     db = get_db()
     meal_swipe = db.execute(
-        "SELECT m.id, price, venmo, timestamp_sell, username"
-        " FROM meal_swipe m JOIN user u ON m.seller_id = u.id"
-        " ORDER BY timestamp_sell DESC"
+        """
+        SELECT m.id, price, venmo, timestamp_sell, username
+        FROM meal_swipe m JOIN user u ON m.seller_id = u.id
+        ORDER BY timestamp_sell DESC
+        """
     ).fetchall()
-    return render_template("trade/buy.html", posts = meal_swipe)
+    return render_template("trade/buy.html", posts=meal_swipe)
 
 
 
 @bp.route("/sell", methods=("GET", "POST"))
-#@login_required
+@login_required
 def sell():
     # if the form is submitted, process it
     if request.method == "POST":
@@ -68,31 +70,39 @@ def sell():
     return render_template("trade/sell.html")
 
 
-@bp.route("/<int:id>/view", methods=("GET", "POST"))
+@bp.route("/view/<int:id>", methods=("GET", "POST"))
 @login_required
 def view(id):
+    print(id)
     """Update a post if the current user is the author."""
-
     # user has clicked 'buy'
-    if request.method == "POST":
-        # todo: change everything within if
-        title = request.form["title"]
-        body = request.form["body"]
-        error = None
-
-        if not title:
-            error = "Title is required."
-
-        if error is not None:
-            flash(error)
-        else:
-            db = get_db()
-            db.execute(
-                "UPDATE post SET title = ?, body = ? WHERE id = ?", (title, body, id)
-            )
-            db.commit()
-            return redirect(url_for("payment.buy"))
+    # if request.method == "POST":
+    #     # todo: change everything within if
+    #     title = request.form["title"]
+    #     body = request.form["body"]
+    #     error = None
+    #
+    #     if not title:
+    #         error = "Title is required."
+    #
+    #     if error is not None:
+    #         flash(error)
+    #     else:
+    #         db = get_db()
+    #         db.execute(
+    #             "UPDATE post SET title = ?, body = ? WHERE id = ?", (title, body, id)
+    #         )
+    #         db.commit()
+    #         return redirect(url_for("payment.buy"))
 
     # return information about the swipe
-    post = {}
+    db = get_db()
+    post = db.execute(
+        f"""
+        SELECT m.id, price, venmo, timestamp_sell, username
+        FROM meal_swipe m JOIN user u ON m.seller_id = u.id
+        WHERE m.id={id}
+        """
+    ).fetchone()
     return render_template("trade/view.html", post=post)
+

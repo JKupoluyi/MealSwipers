@@ -20,15 +20,16 @@ def index():
     return redirect(url_for("trade.buy"))
 
 
-@bp.route("/read/<int:id>", methods=("GET",))
+@bp.route("/read/<string:username>", methods=("GET",))
 @login_required
-def read(id):
+def read(username):
     """Shows all reviews + ratings for a specific user"""
-    db = get_db()
-    posts = db.execute(
-        # todo: make query
-    ).fetchall()
-    return render_template("review/read.html", posts=posts)
+    # db = get_db()
+    # posts = db.execute(
+    #     # todo: make query
+    # ).fetchall()
+    post = {}
+    return render_template("review/read.html", post=post, username=username)
 
 
 @bp.route("/write/<int:id>", methods=("GET", "POST"))

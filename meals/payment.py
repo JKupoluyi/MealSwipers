@@ -24,7 +24,7 @@ def index():
 @login_required
 def buy(id):
     """Processes payment for swipe"""
-    pass
+    return "PAYMENT PAGE for swipe id " + str(id)
 
 
 @bp.route("/<int:id>/get_paid", methods=("GET", "POST"))

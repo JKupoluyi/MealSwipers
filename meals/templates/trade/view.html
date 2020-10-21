@@ -1,1 +1,3 @@
 <!-- page to display details specific to one meal swipe -->
+<p>You are viewing swipe {{post['id']}} from {{post['username']}} for ${{post['price']}}</p>
+<p>To buy, click <a href="{{url_for('payment.buy', id=post['id'])}}">here</a></p>
