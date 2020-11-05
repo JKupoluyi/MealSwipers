@@ -1,1 +1,21 @@
 <!-- page for users to write reviews -->
+<h1>Write review</h1>
+<p>You are reviewing swipe {{post['id']}} from {{post['username']}} for ${{post['price']}}</p>
+<p>This was sold on {{post['timestamp_sell']}} and bought on {{post['timestamp_buy']}}</p>
+
+<form method="post">
+    <p>Review rating:</p>
+    <input type="radio" id="1star" name="star" value="1">
+    <label for="1star">1</label>
+    <input type="radio" id="2star" name="star" value="2">
+    <label for="2star">2</label>
+    <input type="radio" id="3star" name="star" value="3">
+    <label for="3star">3</label>
+    <input type="radio" id="4star" name="star" value="4">
+    <label for="4star">4</label>
+    <input type="radio" id="5star" name="star" value="5">
+    <label for="5star">5</label>
+    <p>Review text:</p>
+    <textarea name="review_text" cols="40" rows="3"></textarea><br>
+    <input type="submit" name="review_submit">
+</form>
