@@ -100,9 +100,12 @@ def view(id):
     post = db.execute(
         f"""
         SELECT m.id, price, venmo, timestamp_sell, username
-        FROM meal_swipe m JOIN user u ON m.seller_id = u.id
+        FROM meal_swipe m 
+        JOIN user u ON m.seller_id = u.id
         WHERE m.id={id}
         """
+        #INNER JOIN review ON review.seller_id = u.id
     ).fetchone()
     return render_template("trade/view.html", post=post)
+
 

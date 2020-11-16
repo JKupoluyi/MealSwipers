@@ -24,12 +24,17 @@ def index():
 @login_required
 def read(username):
     """Shows all reviews + ratings for a specific user"""
-    # db = get_db()
-    # posts = db.execute(
-    #     # todo: make query
-    # ).fetchall()
+    db = get_db()
+    posts = db.execute(
+        f"""
+            SELECT r.timestamp, r.rating, r.description
+            FROM review r
+            JOIN user u ON r.seller_id = u.id
+            WHERE m.username = {username}
+        """
+    ).fetchall()
     post = {}
-    return render_template("review/read.html", post=post, username=username)
+    return render_template("review/read.html", post=posts, username=username)
 
 
 @bp.route("/write/<int:id>", methods=("GET", "POST"))
