@@ -10,6 +10,7 @@ from werkzeug.exceptions import abort
 from meals.auth import login_required
 from meals.db import get_db
 
+
 bp = Blueprint("payment", __name__, url_prefix="/payment")
 
 

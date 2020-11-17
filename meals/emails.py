@@ -7,8 +7,8 @@ def sendemail(emailtype,user_receiving):
     password = "ABCDEFG!!"
     context = ssl.create_default_context()
     reviewurl = "blank for now" #need to obtain seller review page url
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context = context) as server:
-        server.login("MealSwipers@gmail.com", password)
+    with smtplib.SMTP_SSL("smtp.case.edu", 25, context = context) as server:
+        # server.login("MealSwipers@gmail.com", password)
         if(emailtype == "Transaction completed"):
             message = "Your recent transaction through MealSwipers has been completed, please submit a review here: "
             message.append(reviewurl)
@@ -19,3 +19,6 @@ def sendemail(emailtype,user_receiving):
         if(emailtype == "Message waiting"):
             message = "You have a waiting message on MealSwipers!  Please log in to MealSwipers to continue the meal swipe transaction."
             server.sendmail("MealSwipers@gmail.com", user_receiving, message)
+
+if __name__ == '__main__':
+    sendemail('Transaction completed', 'ajd173@case.edu')

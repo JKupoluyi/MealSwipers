@@ -30,7 +30,7 @@ def read(username):
             SELECT r.timestamp, r.rating, r.description
             FROM review r
             JOIN user u ON r.seller_id = u.id
-            WHERE m.username = {username}
+            WHERE u.username = '{username}'
         """
     ).fetchall()
     post = {}
@@ -68,6 +68,7 @@ def write(id):
                 return "ERROR: Could not find meal swipe"
 
             # todo: delete once buying is available
+            # if buyer_id != g.user['id'] flag error
             buyer_id = meal_swipe['buyer_id']
             if not buyer_id:
                 buyer_id = 0
@@ -96,7 +97,7 @@ def write(id):
     if not meal_swipe:
         error = 'Meal swipe not found'
     # todo: reenable once buying is active
-    # elif meal_swipe['buyer_id'] != logged_in_user_id:
+    # elif meal_swipe['buyer_id'] != g.user['id']:
     #     error = 'Only the buyer may write a review'
 
     if error is not None:
