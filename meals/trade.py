@@ -32,6 +32,7 @@ def buy():
         """
         SELECT m.id, price, venmo, timestamp_sell, username
         FROM meal_swipe m JOIN user u ON m.seller_id = u.id
+        WHERE buyer_id IS NULL
         ORDER BY timestamp_sell DESC
         """
     ).fetchall()

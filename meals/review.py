@@ -67,11 +67,9 @@ def write(id):
             if not meal_swipe:
                 return "ERROR: Could not find meal swipe"
 
-            # todo: delete once buying is available
-            # if buyer_id != g.user['id'] flag error
             buyer_id = meal_swipe['buyer_id']
-            if not buyer_id:
-                buyer_id = 0
+            if buyer_id != g.user['id']:
+                return "ERROR: NO PERMISSION"
 
             db.execute(
                 "INSERT INTO review (seller_id, buyer_id, swipe_id, rating, description) VALUES (?, ?, ?, ?, ?)",
@@ -97,8 +95,8 @@ def write(id):
     if not meal_swipe:
         error = 'Meal swipe not found'
     # todo: reenable once buying is active
-    # elif meal_swipe['buyer_id'] != g.user['id']:
-    #     error = 'Only the buyer may write a review'
+    elif meal_swipe['buyer_id'] != g.user['id']:
+        error = 'Only the buyer may write a review'
 
     if error is not None:
         return error

@@ -10,6 +10,8 @@ from werkzeug.exceptions import abort
 from meals.auth import login_required
 from meals.db import get_db
 
+import datetime
+
 
 bp = Blueprint("payment", __name__, url_prefix="/payment")
 
@@ -25,7 +27,27 @@ def index():
 @login_required
 def buy(id):
     """Processes payment for swipe"""
-    return "PAYMENT PAGE for swipe id " + str(id)
+    db = get_db()
+    db.execute(
+        f"""
+        UPDATE meal_swipe
+        SET buyer_id = {g.user['id']}, timestamp_buy = '{datetime.datetime.now()}'
+        WHERE id={id}
+        """
+    )
+    db.commit()
+
+    db = get_db()
+    ms = db.execute(
+        'select * from meal_swipe'
+    ).fetchone()
+
+    # ms = dict(ms)
+    # for key, value in ms.items():
+    #     print(key, value)
+    # print(ms['timestamp_sell'])
+
+    return "<p>YOU HAVE JUST BOUGHT MEAL SWIPE ID " + str(id) + f"</p><p>CLICK TO WRITE A REVIEW <a href='{url_for('review.write', id=id)}'>HERE</a> HELLO"
 
 
 @bp.route("/<int:id>/get_paid", methods=("GET", "POST"))
