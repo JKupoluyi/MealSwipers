@@ -1,0 +1,259 @@
+<!-- page to display details specific to one meal swipe -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style type="text/css">
+
+    @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-family: 'Poppins',sans-serif;
+            color: #222;
+        }
+
+        table {
+            border-collapse:separate;
+            border-radius:10px;
+            -moz-border-radius:6px;
+        }
+
+
+        th {
+            border-top: none;
+        }
+
+        td:first-child, th:first-child {
+            border-left: none;
+        }
+
+        .checked {
+            color: orange;
+        }
+
+        body,
+        table,
+        td,
+        a {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        table,
+        td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+
+
+        img {
+            -ms-interpolation-mode: bicubic;
+        }
+
+        img {
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+
+        .in_block_div {
+            display:inline-block; 
+            max-width:50%; 
+            min-width:100px; 
+            vertical-align:top; 
+            width:100%;
+        }
+
+        table {
+            border-collapse: collapse !important;
+        }
+
+        body {
+            height: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            background-color: #eeeeee00;
+            
+        }
+
+        .table_set {
+            background-color: #eeeeee;
+        }
+
+        .swipe_price {
+            font-size: 16px; 
+            font-weight: 400;
+            line-height: 24px; 
+            padding: 15px 10px 5px 10px;
+        }
+
+        .swipe_total {
+            font-size: 16px;
+            font-weight: 800; 
+            line-height: 24px; 
+            padding: 10px; 
+            border-top: 3px solid #eeeeee; 
+            border-bottom: 3px solid #eeeeee;
+        }
+
+        .page_table { 
+            max-width:700px;
+        }
+
+        a[x-apple-data-detectors] {
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+        }
+
+        @media screen and (max-width: 480px) {
+            .mobile-hide {
+                display: none !important;
+            }
+
+            .mobile-center {
+                text-align: center !important;
+            }
+        }
+
+        div[style*="margin: 16px 0;"] {
+            margin: 0 !important;
+        }
+    </style>
+
+<body class = "table_set">
+    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+		<div class="container-fluid">
+			<a class="navbar-brand reframe" href="#"><img src="{{url_for('static', filename='blackresize.png')}}"></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="#">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">About</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Services</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Team</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Connect</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+    <table  border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr >
+            <td align="center">
+                <table class = "page_table" align="center" border="0" cellpadding="0" cellspacing="0" width="100%" >
+                    <tr>
+                        <td align="center" valign="top" style="font-size:0; padding: 35px;" bgcolor="black">
+                            <div class = "in_block_div">
+                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:300px;">
+                                    <tr>
+                                        <td align="left" valign="top" style="font-size: 36px; font-weight: 800; line-height: 48px;" class="mobile-center">
+                                            <h1 style="font-size: 36px; font-weight: 800; margin: 0; color: #ffffff;">Meal Swipers</h1>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="mobile-hide in_block_div">
+                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:300px;">
+                                    <tr>
+                                        <td align="right" valign="top">
+                                            <table cellspacing="0" cellpadding="0" border="0" align="right">
+                                                <tr>
+                                                    <td style="font-size: 18px; font-weight: 400;">
+                                                        <p style="font-size: 18px; font-weight: 400; margin: 0; color: #ffffff;"><a href="{{url_for('trade.buy', id=post['id'])}}" style="color: #ffffff; text-decoration: none;">Go Back &nbsp;</a></p>
+                                                    </td>
+                                                    <td style="font-size: 18px; font-weight: 400; line-height: 24px;"> <a href="#" target="_blank" style="color: #ffffff; text-decoration: none;"><img src="https://img.icons8.com/color/48/000000/small-business.png" width="27" height="23" style="display: block; border: 0px;" /></a> </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="padding: 35px 35px 20px 35px; background-color: #ffffff;" bgcolor="#ffffff">
+                            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" >
+                                <tr>
+                                    <td align="center" style="font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 25px;"> <img src="https://img.icons8.com/carbon-copy/100/000000/checked-checkbox.png" width="125" height="120" style="display: block; border: 0px;" /><br>
+                                        <h2 style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;"> Let's Eat! </h2>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 10px;">
+                                        <p style="font-size: 16px; font-weight: 400; line-height: 24px; color: #777777;"> Hey {{g.user['username']}}, here's your order summary, and more information on your seller. </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="padding-top: 20px;">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <td width="75%" align="left" bgcolor="#eeeeee" style="font-weight: 800; line-height: 24px; padding: 10px;"> Order Number # </td>
+                                                <td width="25%" align="left" bgcolor="#eeeeee" style="font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;"> {{post['id']}} </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="75%" align="left" class = "swipe_price"> Meal Swipe </td>
+                                                <td width="25%" align="left" class = "swipe_price"> ${{post['price']}} </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="padding-top: 20px;">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <td width="75%" align="left" class = "swipe_total"> TOTAL </td>
+                                                <td width="25%" align="left" class = "swipe_total"> ${{post['price']}} </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style=" padding: 35px; background-color: black" bgcolor="#1b9ba3">
+                            <tr>
+                                <td align="center" style = "padding: 25px 0 15px 0;  background-color: black" bgcolor="#1b9ba3">
+                                    <table border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td align="center" style="border-radius: 5px;" bgcolor="#66b3b7"> <a href="{{url_for('review.write', id=g.user['id'])}}" style="font-size: 18px; color: #ffffff; text-decoration: none; border-radius: 5px; background-color: green; padding: 15px 15px; border: 1px solid black; display: block;">Write Review</a> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                </td>
+                            </tr>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

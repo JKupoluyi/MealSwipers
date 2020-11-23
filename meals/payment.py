@@ -47,7 +47,8 @@ def buy(id):
     #     print(key, value)
     # print(ms['timestamp_sell'])
 
-    return "<p>YOU HAVE JUST BOUGHT MEAL SWIPE ID " + str(id) + f"</p><p>CLICK TO WRITE A REVIEW <a href='{url_for('review.write', id=id)}'>HERE</a> HELLO"
+    return render_template("payment/viewpayment.html", post=g.user)
+    #"<p>YOU HAVE JUST BOUGHT MEAL SWIPE ID " + str(id) + f"</p><p>CLICK TO WRITE A REVIEW <a href='{url_for('review.write', id=id)}'>HERE</a> HELLO"
 
 
 @bp.route("/<int:id>/get_paid", methods=("GET", "POST"))
@@ -55,3 +56,9 @@ def buy(id):
 def sell(id):
     """Allows sellers to claim payment for a confirmed + completed transaction"""
     pass
+
+
+@bp.route("/viewp", methods=("GET",))
+@login_required
+def view():
+    return render_template("payment/pay.html")
