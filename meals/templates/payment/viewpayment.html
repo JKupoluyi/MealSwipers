@@ -206,11 +206,11 @@
                                 </tr>
                                 <tr>
                                     <td align="left" style="font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 10px;">
-                                        <p style="font-size: 16px; font-weight: 400; line-height: 24px; color: #777777;"> Hey {{g.user['username']}}, here's your order summary, and more information on your seller. </p>
+                                        <p style="font-size: 16px; font-weight: 400; line-height: 24px; color: #777777;"> Hey {{g.user['username']}}, Thanks for your order, please leave a review for the seller. </p>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td align="left" style="padding-top: 20px;">
+                                    <!-- <td align="left" style="padding-top: 20px;">
                                         <table cellspacing="0" cellpadding="0" border="0" width="100%">
                                             <tr>
                                                 <td width="75%" align="left" bgcolor="#eeeeee" style="font-weight: 800; line-height: 24px; padding: 10px;"> Order Number # </td>
@@ -221,28 +221,28 @@
                                                 <td width="25%" align="left" class = "swipe_price"> ${{post['price']}} </td>
                                             </tr>
                                         </table>
-                                    </td>
+                                    </td> -->
                                 </tr>
                                 <tr>
                                     <td align="left" style="padding-top: 20px;">
-                                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                        <!-- <table cellspacing="0" cellpadding="0" border="0" width="100%">
                                             <tr>
                                                 <td width="75%" align="left" class = "swipe_total"> TOTAL </td>
                                                 <td width="25%" align="left" class = "swipe_total"> ${{post['price']}} </td>
                                             </tr>
-                                        </table>
+                                        </table> -->
                                     </td>
                                 </tr>
                             </table>
                         </td>
                     </tr>
                     <tr>
-                        <td align="center" style=" padding: 35px; background-color: black" bgcolor="#1b9ba3">
+                        <td align="center" style=" padding: 0px; background-color: black" bgcolor="#1b9ba3">
                             <tr>
                                 <td align="center" style = "padding: 25px 0 15px 0;  background-color: black" bgcolor="#1b9ba3">
                                     <table border="0" cellspacing="0" cellpadding="0">
                                         <tr>
-                                            <td align="center" style="border-radius: 5px;" bgcolor="#66b3b7"> <a href="{{url_for('review.write', id=g.user['id'])}}" style="font-size: 18px; color: #ffffff; text-decoration: none; border-radius: 5px; background-color: green; padding: 15px 15px; border: 1px solid black; display: block;">Write Review</a> </td>
+                                            <td align="center" style="border-radius: 5px;" bgcolor="#66b3b7"> <a href="{{url_for('review.write', id = post['id'])}}" style="font-size: 18px; color: #ffffff; text-decoration: none; border-radius: 5px; background-color: green; padding: 15px 15px; border: 1px solid black; display: block;">Write Review</a> </td>
                                         </tr>
                                     </table>
                                 </td>

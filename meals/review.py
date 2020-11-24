@@ -41,6 +41,7 @@ def read(username):
 @bp.route("/write/<int:id>", methods=("GET", "POST"))
 @login_required
 def write(id):
+    print("This is the write review id: " + str(id))
     """Allows a user to write a review for a specific meal swipe"""
     # if the form is submitted, process it
     if request.method == "POST":
@@ -103,4 +104,4 @@ def write(id):
     else:
         meal_swipe = dict(meal_swipe)
         meal_swipe['timestamp_buy'] = str(meal_swipe['timestamp_buy'])[:10]
-        return render_template("review/write.html", post=meal_swipe)
+        return render_template("review/write.html", post=meal_swipe, id = id)

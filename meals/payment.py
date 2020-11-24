@@ -38,17 +38,23 @@ def buy(id):
     db.commit()
 
     db = get_db()
+    
     ms = db.execute(
-        'select * from meal_swipe'
+        f"""select * from meal_swipe
+            WHERE id = {id}
+        """
     ).fetchone()
 
-    # ms = dict(ms)
-    # for key, value in ms.items():
-    #     print(key, value)
-    # print(ms['timestamp_sell'])
+    for row in db.execute('select * from meal_swipe'):
+        print(dict(row))
 
-    return render_template("payment/viewpayment.html", post=g.user)
-    #"<p>YOU HAVE JUST BOUGHT MEAL SWIPE ID " + str(id) + f"</p><p>CLICK TO WRITE A REVIEW <a href='{url_for('review.write', id=id)}'>HERE</a> HELLO"
+    ms = dict(ms)
+    for key, value in ms.items():
+        print("This is the one fetched record")
+        print(key, value)
+    print(ms['timestamp_sell'])
+
+    return render_template("payment/viewpayment.html", post=ms)
 
 
 @bp.route("/<int:id>/get_paid", methods=("GET", "POST"))
@@ -57,8 +63,59 @@ def sell(id):
     """Allows sellers to claim payment for a confirmed + completed transaction"""
     pass
 
-
+"""
 @bp.route("/viewp", methods=("GET",))
 @login_required
 def view():
-    return render_template("payment/pay.html")
+    return render_template("payment/pay.html", post = g.user)
+
+"""
+
+@bp.route("/viewp/<int:id>", methods=("GET", "POST"))
+@login_required
+def view(id):
+    print(id)
+    """Update a post if the current user is the author."""
+    # user has clicked 'buy'
+    # if request.method == "POST":
+    #     # todo: change everything within if
+    #     title = request.form["title"]
+    #     body = request.form["body"]
+    #     error = None
+    #
+    #     if not title:
+    #         error = "Title is required."
+    #
+    #     if error is not None:
+    #         flash(error)
+    #     else:
+    #         db = get_db()
+    #         db.execute(
+    #             "UPDATE post SET title = ?, body = ? WHERE id = ?", (title, body, id)
+    #         )
+    #         db.commit()
+    #         return redirect(url_for("payment.buy"))
+
+    # return information about the swipe
+    db = get_db()
+    post = db.execute(
+        f"""
+            SELECT m.id, price, venmo, timestamp_sell, username
+            FROM meal_swipe m 
+            JOIN user u ON m.seller_id = u.id
+            WHERE m.id={id}
+        """
+    ).fetchone()
+
+    review_post = db.execute(
+        f"""
+            SELECT r.timestamp, r.rating, r.description, b.username
+            FROM meal_swipe m
+            JOIN review r on m.seller_id = r.seller_id
+            JOIN user b on r.buyer_id = b.id
+            WHERE m.id={id}
+        """
+    ).fetchall()
+    return render_template("payment/pay.html", post=post, review_post=review_post)
+
+
