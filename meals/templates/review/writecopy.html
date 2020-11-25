@@ -1,5 +1,4 @@
-
-<!-- page for users to read reviews -->
+page for users to write reviews
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,7 +12,6 @@
       rel="stylesheet"
     />
     <title>MealSwipers - Buy Page</title>
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round"> -->
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
     <link
       rel="stylesheet"
@@ -94,21 +92,28 @@
       </div>
     </nav>
   </head>
-  <h1>Showing reviews for username {{username}}</h1>
-  <div class="container">
-    {% block content %} 
-    {% for review in post %}
+  <h1>Write review</h1>
+  <h3>You are reviewing swipe bought on <b>{{post['timestamp_buy']}}</b> from <b>{{post['username']}}</b> for $<b>{{post['price']}}</b></h3>
     <div class="row text-center">
       <div class="col-sm-6 col-md-4">
         <div class="testimonial-box">
-          <div class="ratings-icons">{{ review['rating']}}</div>
-          <h4>{{ review['timestamp'].strftime('%Y-%m-%d') }}</h4>
-          <p>{{ review['description']}}</p>
+          <form method="post">
+            <p>Review rating:</p>
+            <input type="radio" id="1star" name="star" value="1">
+            <label for="1star">1</label>
+            <input type="radio" id="2star" name="star" value="2">
+            <label for="2star">2</label>
+            <input type="radio" id="3star" name="star" value="3">
+            <label for="3star">3</label>
+            <input type="radio" id="4star" name="star" value="4">
+            <label for="4star">4</label>
+            <input type="radio" id="5star" name="star" value="5">
+            <label for="5star">5</label>
+            <p>Review text:</p>
+            <textarea name="review_text" cols="40" rows="3"></textarea><br>
+            <input type="submit" name="review_submit">
+        </form>
         </div>
       </div>
-      <!-- End Col -->
     </div>
-    {% endfor %} 
-    {% endblock %}
-  </div>
 </html>

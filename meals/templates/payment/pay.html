@@ -49,6 +49,10 @@ input[type="radio"] {
     border-color: black;
 }
 
+h1 {
+	font-size: 50px;
+}
+
 </style>
 <body>
         <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
@@ -58,23 +62,14 @@ input[type="radio"] {
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Team</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Connect</a>
-                        </li>
-                    </ul>
+					<ul class = "navbar-nav ml-auto">
+						<li class = "nav-item active">
+							<a class = "nav-link" href = "{{url_for('trade.buy')}}">Home</a>
+						</li>
+						<li class = "nav-item">
+							<a class = "nav-link" href = "{{url_for('auth.logout')}}">Logout</a>
+						</li>
+					</ul>
                 </div>
             </div>
 		</nav>
@@ -83,7 +78,7 @@ input[type="radio"] {
 			<!-- For demo purpose -->
 			<div class="row mb-4">
 				<div class="col-lg-8 mx-auto text-center">
-					<h1 class="display-4">Payment Details</h1>
+					<h1 >Payment Details</h1>
 				</div>
 			</div> <!-- End -->
 			<div class="row">

@@ -17,6 +17,9 @@ bp = Blueprint("trade", __name__)
 def index():
     return render_template("trade/index.html")
 
+@bp.route("/auth/login")
+def login_index():
+    return render_template("auth/login.html")
 
 @bp.route("/buy")
 @login_required
