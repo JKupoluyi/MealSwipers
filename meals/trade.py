@@ -32,10 +32,11 @@ def buy():
     """Show all the posts, most recent first."""
     db = get_db()
     meal_swipe = db.execute(
-        """
+        f"""
         SELECT m.id, price, venmo, timestamp_sell, username
         FROM meal_swipe m JOIN user u ON m.seller_id = u.id
         WHERE buyer_id IS NULL
+        AND m.seller_id != {g.user['id']}
         ORDER BY timestamp_sell DESC
         """
     ).fetchall()
