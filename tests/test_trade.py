@@ -2,10 +2,12 @@ import pytest
 
 from meals.db import get_db
 
+# TODO: CHANGE ALL
+
 
 def test_index(client, auth):
     response = client.get("/")
-    assert b"Log In" in response.data
+    assert response.status_code == 200
     assert b"Register" in response.data
 
     auth.login()

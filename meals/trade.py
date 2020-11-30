@@ -5,7 +5,6 @@ from flask import redirect
 from flask import render_template
 from flask import request
 from flask import url_for
-from werkzeug.exceptions import abort
 
 from meals.auth import login_required
 from meals.db import get_db
@@ -17,18 +16,11 @@ bp = Blueprint("trade", __name__)
 def index():
     return render_template("trade/index.html")
 
-@bp.route("/auth/login")
-def login_index():
-    return render_template("auth/login.html")
 
 @bp.route("/buy")
 @login_required
 def buy():
     """Shows all meal swipes that are available to buy"""
-    # db = get_db()
-    # posts = db.execute(
-    #     # todo: make query
-    # ).fetchall()
     """Show all the posts, most recent first."""
     db = get_db()
     meal_swipe = db.execute(
@@ -43,13 +35,11 @@ def buy():
     return render_template("trade/buy.html", posts=meal_swipe)
 
 
-
 @bp.route("/sell", methods=("GET", "POST"))
 @login_required
 def sell():
     # if the form is submitted, process it
     if request.method == "POST":
-        # todo: change everything within if
         venmo = request.form["venmo"]
         price = request.form["price"]
         error = None
@@ -78,28 +68,6 @@ def sell():
 @bp.route("/view/<int:id>", methods=("GET", "POST"))
 @login_required
 def view(id):
-    print(id)
-    """Update a post if the current user is the author."""
-    # user has clicked 'buy'
-    # if request.method == "POST":
-    #     # todo: change everything within if
-    #     title = request.form["title"]
-    #     body = request.form["body"]
-    #     error = None
-    #
-    #     if not title:
-    #         error = "Title is required."
-    #
-    #     if error is not None:
-    #         flash(error)
-    #     else:
-    #         db = get_db()
-    #         db.execute(
-    #             "UPDATE post SET title = ?, body = ? WHERE id = ?", (title, body, id)
-    #         )
-    #         db.commit()
-    #         return redirect(url_for("payment.buy"))
-
     # return information about the swipe
     db = get_db()
     post = db.execute(
