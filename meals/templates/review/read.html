@@ -1,114 +1,134 @@
-
 <!-- page for users to read reviews -->
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link
-      href="{{ url_for('static', filename='style.css') }}"
-      rel="stylesheet"
-    />
-    <title>MealSwipers - Buy Page</title>
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round"> -->
-    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link
-      href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
-      rel="stylesheet"
-      id="bootstrap-css"
-    />
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <style>
-      @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,700");
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="favicon.ico">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round"> -->
 
-      .testimonial-box img {
-        display: inline-block;
-        width: 90px;
-        height: 90px;
-        border-radius: 50%;
-        margin: 0 0 15px;
-      }
-      .testimonial-box h4 {
-        color: #fe4819;
-      }
-      .testimonial-box p {
-        margin-bottom: 20px;
-        font-size: 17px;
-        font-style: italic;
-        font-weight: 400;
-      }
-      .ratings-icons {
-        color: #fec42d;
-        margin-bottom: 15px;
-      }
-    </style>
-    <script>
-      $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-      });
-    </script>
-    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
-      <div class="container-fluid">
-        <a class="navbar-brand reframe" href="#"
-          ><img src="{{url_for('static', filename='blackresize.png')}}"
-        /></a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarResponsive"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
+<title>MealSwipers - Read Review Page</title>
+
+<link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+<script src="js/ie-emulation-modes-warning.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+
+body {
+  font-family: 'Poppins',sans-serif;
+}
+.nav-link {
+  font-size: 1.1em !important;
+}
+.btn-grey{
+    background-color:#D8D8D8;
+  color:#FFF;
+}
+.rating-block{
+  background-color:#FAFAFA;
+  border:1px solid #EFEFEF;
+  padding:15px 15px 20px 15px;
+  border-radius:3px;
+}
+.bold{
+  font-weight:700;
+}
+.padding-bottom-7{
+  padding-bottom:7px;
+}
+.review-block-rate{
+	font-size:13px;
+	margin-bottom:15px;
+}
+.review-block{
+  background-color:#FAFAFA;
+  border:1px solid #EFEFEF;
+  margin-top: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius:3px;
+  margin-bottom:0px;
+}
+.review-block-date{
+  font-size:12px;
+}
+.review-block-title{
+  font-size:15px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+.review-block-description{
+  font-size:13px;
+}
+</style>
+<script>
+</script>
+<nav class = "navbar navbar-expand-md navbar-light bg-light sticky-top">
+  <div class = "container-fluid">
+      <a class = "navbar-brand reframe" href = "#"><img src = "{{url_for('static', filename='blackresize.png')}}"></a>
+      <button class = "navbar-toggler" type = "button" data-toggle = "collapse" data-target = "#navbarResponsive">
+          <span class = "navbar-toggler-icon"></span>
+      </button>
+      <div class = "collapse navbar-collapse" id = "navbarResponsive">
           <ul class = "navbar-nav ml-auto">
-            <li class = "nav-item active">
-              <a class = "nav-link" href = "{{url_for('trade.buy')}}">Home</a>
-          </li>
-          <li class = "nav-item">
-              <a class = "nav-link" href = "{{url_for('auth.logout')}}">Logout</a>
-          </li>
-        </ul>
+              <li class = "nav-item active">
+                  <a class = "nav-link" href = "{{url_for('trade.buy')}}">Home</a>
+              </li>
+              <li class = "nav-item">
+                  <a class = "nav-link" href = "{{url_for('auth.logout')}}">Logout</a>
+              </li>
           </ul>
-        </div>
       </div>
-    </nav>
-  </head>
-  <h1>Showing reviews for username {{username}}</h1>
-  <div class="container">
-    {% block content %} 
-    {% for review in post %}
-    <div class="row text-center">
-      <div class="col-sm-6 col-md-4">
-        <div class="testimonial-box">
-          <div class="ratings-icons">{{ review['rating']}}</div>
-          <h4>{{ review['timestamp'].strftime('%Y-%m-%d') }}</h4>
-          <p>{{ review['description']}}</p>
-        </div>
-      </div>
-      <!-- End Col -->
-    </div>
-    {% endfor %} 
-    {% endblock %}
   </div>
+</nav>
+
+
+<body>
+  <h3 align="center" style = "padding-bottom: 10px; padding-top: 50px;">Reviews for {{username}}</h3>
+  <div align = "center" class="container">
+    <div class = "container" class="row">
+      <div>
+        <div class="review-block">
+          {% block content %} 
+          {% for review in post %}
+          <div class="row" style = "  margin: 0;
+          padding: 15px;">
+            <div class="col-sm-3">
+              <img src= "{{url_for('static', filename='avatar50.png')}}" class="img-rounded">
+              <div class="review-block-name">anon</div>
+              <div class="review-block-date" style = "font-size: 15px">{{ review['timestamp'].strftime('%Y-%m-%d') }}</div>
+            </div>
+            <div class="col-sm-9">
+              <div class="review-block-rate">
+                {% for i in range(review['rating']) %}
+                <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align" style = "font-size: 5px" >
+								  <span class="fa fa-star checked" aria-hidden="true" style = "font-size: 20px" ></span>
+								</button>
+                {% endfor %}
+                {% for i in range(5 - review['rating']) %}
+                <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align" style = "font-size: 5px">
+								  <span class="fa fa-star" aria-hidden="true" style = "font-size: 20px"></span>
+								</button>
+                {% endfor %}
+							</div>
+              <div class="review-block-description" style = "font-size: 20px">{{ review['description']}}</div>
+            </div>
+          </div>
+          <hr style = "margin: 0"/>
+          {% endfor %} 
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
 </html>
+

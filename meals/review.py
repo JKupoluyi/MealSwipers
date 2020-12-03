@@ -5,7 +5,6 @@ from flask import redirect
 from flask import render_template
 from flask import request
 from flask import url_for
-from werkzeug.exceptions import abort
 
 from meals.auth import login_required
 from meals.db import get_db
@@ -34,14 +33,12 @@ def read(username):
             ORDER BY r.timestamp DESC
         """
     ).fetchall()
-    post = {}
     return render_template("review/read.html", post=posts, username=username)
 
 
 @bp.route("/write/<int:id>", methods=("GET", "POST"))
 @login_required
 def write(id):
-    print("This is the write review id: " + str(id))
     """Allows a user to write a review for a specific meal swipe"""
     # if the form is submitted, process it
     if request.method == "POST":

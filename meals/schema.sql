@@ -8,12 +8,6 @@ DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS review;
 
 CREATE TABLE user (
-  /*id INTEGER PRIMARY KEY AUTOINCREMENT,
-  email TEXT UNIQUE NOT NULL,
-  password TEXT NOT NULL,
-  name TEXT NOT NULL,
-  payment_info TEXT*/
-
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   username TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL
@@ -28,9 +22,8 @@ CREATE TABLE meal_swipe (
   timestamp_sell TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   timestamp_buy TIMESTAMP,
   price DECIMAL NOT NULL,
-  status TEXT /*NOT NULL*/,
+  status TEXT,
   FOREIGN KEY (seller_id) REFERENCES user (id)
-  /*FOREIGN KEY (buyer_id) REFERENCES user (id)*/
 );
 
 CREATE TABLE post (

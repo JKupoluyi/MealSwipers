@@ -3,36 +3,47 @@ import ssl
 
 #emailtype must be the type of email you wish to send: currently the three options are "Transaction completed", "Swipe purchased", and "Message waiting"
 #user_receiving must be the user email address of the user who should receive the email
-# def sendemail(emailtype,user_receiving):
-#     message = ""
-#     sender = 'from@fromdomain.com'
-#     receivers = [user_receiving]
-#     if(emailtype == "Transaction completed"):
-#         message = "Your recent transaction through MealSwipers has been completed, please submit a review here: "
-#         try:
-#             smtpObj = smtplib.SMTP('alt1.gmail-smtp-in.l.google.com.')
-#             smtpObj.sendmail(sender, receivers, message)
-#             print ("Successfully sent email")
-#         except smtplib.SMTPException:
-#             print ("Error: unable to send email")
-#     if(emailtype == "Swipe purchased"):
-#         message = "Your recent post on MealSwipers has been purchased.  Please log in to MealSwipers to continue the meal swipe transaction."
-#         try:
-#             smtpObj = smtplib.SMTP('alt1.gmail-smtp-in.l.google.com.')
-#             smtpObj.sendmail(sender, user_receiving, message)
-#             print ("Successfully sent email")
-#         except smtplib.SMTPException:
-#             print ("Error: unable to send email")
-#     if(emailtype == "Message waiting"):
-#         message = "You have a waiting message on MealSwipers!  Please log in to MealSwipers to continue the meal swipe transaction."
-#         try:
-#             smtpObj = smtplib.SMTP('alt1.gmail-smtp-in.l.google.com.')
-#             smtpObj.sendmail(sender, receivers, message)
-#             print ("Successfully sent email")
-#         except smtplib.SMTPException:
-#             print ("Error: unable to send email")
+#this works properly on our local machines, however, being that the password must be in plaintext, it is not included here and will not run properly
+# def smtp_gmail():
+    def sendemail(emailtype):
+    username = "dtrisk@gmail.com"
+    password = ""
+    smtp_server = "smtp.gmail.com:587"
+    email_from = "dtrisk@gmail.com"
+    email_to = "dtrisk@gmail.com"
+    email_body = ""
+    if(emailtype == "Transaction completed"):
+        email_body = """From: From MealSwipers <dtrisk@gmail.com>
+                    To: To Person <dtrisk@gmail.com>
+                    Subject: Transaction completed on MealSwipers!
 
+                    "Your recent transaction through MealSwipers has been completed, please visit the website and submit a review!"
+                    """
+    if(emailtype == "Swipe purchased"):
+        email_body = """From: From MealSwipers <dtrisk@gmail.com>
+                    To: To Person <dtrisk@gmail.com>
+                    Subject: Transaction completed on MealSwipers!
 
+                    "Your swipe has been purchased through MealSwipers!  Please log in to communicate with the other party."
+                    """        
+        
+    if(emailtype == "Message waiting"):
+        email_body = """From: From MealSwipers <dtrisk@gmail.com>
+                    To: To Person <dtrisk@gmail.com>
+                    Subject: Transaction completed on MealSwipers!
+
+                    "You have a message waiting on MealSwipers!  Please log in to communicate with the other user."
+                    """
+    smtpObj = smtplib.SMTP('smtp.gmail.com', 587) # or 465
+    smtpObj.ehlo()
+    smtpObj.starttls()
+    smtpObj.login(username, password)
+    smtpObj.sendmail(email_from, email_to, email_body)         
+    print("Successfully sent email")
+
+sendemail("Transaction completed")
+
+'''
 if __name__ == '__main__':
     sender = 'from@fromdomain.com'
     receivers = ['jok10@case.edu','jok10@case.edu']
@@ -86,3 +97,4 @@ if __name__ == '__main__':
         print ("Successfully sent email")
     except smtplib.SMTPException:
         print ("Error: unable to send email")
+'''

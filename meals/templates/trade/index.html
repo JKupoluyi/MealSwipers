@@ -25,18 +25,6 @@
 			<li class = "nav-item active">
 				<a class = "nav-link" href = "#">Home</a>
 			</li>
-			<li class = "nav-item">
-				<a class = "nav-link" href = "#">About</a>
-			</li>
-			<li class = "nav-item">
-				<a class = "nav-link" href = "#">Services</a>
-			</li>
-			<li class = "nav-item">
-				<a class = "nav-link" href = "#">Team</a>
-			</li>
-			<li class = "nav-item">
-				<a class = "nav-link" href = "#">Connect</a>
-			</li>
 		</ul>
 	</div>
 </div>
@@ -54,8 +42,7 @@
 		<div class = "carousel-caption">
 			<h1 class = "display-2">Meal Swipers</h1>
 			<h3>Swipe Me In</h3>
-			<button type = "button" class = "btn btn-outline-light btn-lg">VIEW DEMO</button>
-			<button type = "button" class = "btn btn-primary btn-lg"> Get Started</button>
+			<a href = "{{url_for('auth.login') }}"> <button type = "button" class = "btn btn-primary btn-lg" style = "position: relative; left: -40px"> Get Started</button> </a>
 		</div>
 	</div>
 	<div class = "carousel-item">
@@ -122,11 +109,11 @@
 <div class = "row padding">
 	<div class = "col-md-12 col-lg-6">
 		<h2> Click, Swipe, Eat</h2>
-		<p>Boyyyy you know you need this free free</p>
-		<p>Boyyyy you know you need this free free</p>
-		<p>Boyyyy you know you need this free free</p>
+		<p>Mealswipers is a web trading app for people on campus to buy and sell meal swipes. </p>
+		<p>A seller posts his swipe price on the app, and buyers are allowed to choose their preferred price.</p>
+		<p>Check us out</p>
 		<br>
-		<a href = "#" class = "btn btn-primary"> Learn More</a>
+		<a href = "{{url_for('auth.login') }}"> <button type = "button" class = "btn btn-primary btn-lg" style = "position: relative; left: -80px"> Get Started</button> </a>
 	</div>
 	<div class = "col-lg-6">
 		<img src = "{{url_for('static', filename='burgerfinal.jpg')}}" class = "burger">
@@ -136,14 +123,7 @@
 </div>
 
 <hr class = "my-4">
-<!--- Fixed background -->
-<figure>
-	<div class = "fixed-wrap">
-		<div id = "fixed">
 
-		</div>
-	</div>
-</figure>
 
 <!--- Meet the team -->
 <div class = "container-fluid padding">
@@ -164,7 +144,6 @@
 			<div class = "card-body">
 				<h4 class = "card-title">Jesulayomi Kupoluyi</h4>
 				<p class = "card-text"> Something about yourself </p>
-				<a href = "#" class = "btn btn-outline-secondary">See profile</a>
 			</div>
 
 		</div>
@@ -175,7 +154,6 @@
 			<div class = "card-body">
 				<h4 class = "card-title">Andrew Duffield</h4>
 				<p class = "card-text"> Something about yourself  </p>
-				<a href = "#" class = "btn btn-outline-secondary">See profile</a>
 			</div>
 
 		</div>
@@ -186,7 +164,6 @@
 			<div class = "card-body">
 				<h4 class = "card-title">Tevin McDowell</h4>
 				<p class = "card-text"> Something about yourself  </p>
-				<a href = "#" class = "btn btn-outline-secondary">See profile</a>
 			</div>
 		</div>
 	</div>
@@ -196,7 +173,6 @@
 			<div class = "card-body">
 				<h4 class = "card-title">Kareem Akabashorun</h4>
 				<p class = "card-text"> Something about yourself  </p>
-				<a href = "#" class = "btn btn-outline-secondary">See profile</a>
 			</div>
 		</div>
 	</div>
@@ -206,7 +182,6 @@
 			<div class = "card-body">
 				<h4 class = "card-title">Shaoyang Wang</h4>
 				<p class = "card-text"> Something about yourself  </p>
-				<a href = "#" class = "btn btn-outline-secondary">See profile</a>
 			</div>
 		</div>
 	</div>
@@ -216,7 +191,6 @@
 			<div class = "card-body">
 				<h4 class = "card-title">David Tritsko</h4>
 				<p class = "card-text"> Something about yourself  </p>
-				<a href = "#" class = "btn btn-outline-secondary">See profile</a>
 			</div>
 		</div>
 	</div>
