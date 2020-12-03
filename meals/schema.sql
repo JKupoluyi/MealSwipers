@@ -4,7 +4,7 @@
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS post;
 DROP TABLE IF EXISTS meal_swipe;
-DROP TABLE IF EXISTS message;
+DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS review;
 
 CREATE TABLE user (
@@ -18,6 +18,7 @@ CREATE TABLE user (
   username TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL
 );
+
 
 CREATE TABLE meal_swipe (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -54,16 +55,13 @@ CREATE TABLE review (
   FOREIGN KEY (swipe_id) REFERENCES meal_swipe (id)
 );
 
-CREATE TABLE message (
+CREATE TABLE messages (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  seller_id INTEGER NOT NULL,
-  buyer_id INTEGER NOT NULL,
-  swipe_id INTEGER NOT NULL,
-  'timestamp' TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  'read' BOOLEAN NOT NULL,
+  msg_by INTEGER NOT NULL,
+  msg_to INTEGER NOT NULL,
+  'msg_time' TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   body TEXT NOT NULL,
-  FOREIGN KEY (seller_id) REFERENCES user (id),
-  FOREIGN KEY (buyer_id) REFERENCES user (id),
-  FOREIGN KEY (swipe_id) REFERENCES meal_swipe (id)
+  FOREIGN KEY (msg_by) REFERENCES user (id),
+  FOREIGN KEY (msg_to) REFERENCES user (id)
 );
 

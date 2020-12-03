@@ -1,0 +1,200 @@
+{% block body %}
+<script>
+    function ajax(){
+
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function(){
+    if(req.readyState == 4 && req.status == 200)
+    {
+    document.getElementById('chats').innerHTML = req.responseText;
+    }
+    }
+    req.open('POST', "/chat/chats", true);
+    req.send();
+    }
+    setInterval(function(){ajax()}, 10);
+</script>
+
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style type="text/css">
+
+    @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-family: 'Poppins',sans-serif;
+            color: #222;
+        }
+
+        table {
+            border-collapse:separate;
+            border-radius:10px;
+            -moz-border-radius:6px;
+        }
+
+
+        th {
+            border-top: none;
+        }
+
+        td:first-child, th:first-child {
+            border-left: none;
+        }
+
+        .checked {
+            color: orange;
+        }
+
+        body,
+        table,
+        td,
+        a {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        table,
+        td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+
+
+        img {
+            -ms-interpolation-mode: bicubic;
+        }
+
+        img {
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+
+        .in_block_div {
+            display:inline-block; 
+            max-width:50%; 
+            min-width:100px; 
+            vertical-align:top; 
+            width:100%;
+        }
+
+        table {
+            border-collapse: collapse !important;
+        }
+
+        body {
+            height: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            background-color: #eeeeee00;
+            
+        }
+
+        .table_set {
+            background-color: #eeeeee;
+        }
+
+        .swipe_price {
+            font-size: 16px; 
+            font-weight: 400;
+            line-height: 24px; 
+            padding: 15px 10px 5px 10px;
+        }
+
+        .swipe_total {
+            font-size: 16px;
+            font-weight: 800; 
+            line-height: 24px; 
+            padding: 10px; 
+            border-top: 3px solid #eeeeee; 
+            border-bottom: 3px solid #eeeeee;
+        }
+
+        .page_table { 
+            max-width:700px;
+        }
+
+        a[x-apple-data-detectors] {
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+        }
+
+        @media screen and (max-width: 480px) {
+            .mobile-hide {
+                display: none !important;
+            }
+
+            .mobile-center {
+                text-align: center !important;
+            }
+        }
+
+        div[style*="margin: 16px 0;"] {
+            margin: 0 !important;
+        }
+    </style>
+
+<div class="row" onload="ajax();">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-4" style="background-color: #f5f5f5;margin: 0px 10px;border-radius: 4px; padding: 10px 20px 20px 20px;">
+        <ul class="list-group">
+            {% for user in users %}
+                {% if user.id != session.user_id %}
+                    <li class="list-group-item"><a href="{{user.id}}"> {{user.username}} </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-xs-6" style="background-color: #f5f5f5;margin: 0px 10px;border-radius: 4px; padding: 10px 20px 20px 20px;">
+
+     
+        {% if session.lid != session.user_id %}   
+            <div id="chat-box" style="overflow-y: scroll; height: 350px; padding: 10px 0px 0px 0px;">
+                <div id="chats"></div>
+            </div>
+            {% from "formhelpers.html" import render_field %}
+            <div>
+                <form method="POST" action="">
+                <div class="form-group">
+                    {{render_field(form.body, class_="form-control", value="", placeholder="Enter your text...")}}
+                </div>
+                <button type="submit" class="btn btn-primary pull-right">Send</button>
+                 </form>
+
+                 <td align="center" style = "padding: 25px 0 15px 0;  background-color: black" bgcolor="#1b9ba3">
+                    <table border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td align="center" style="border-radius: 5px;" bgcolor="#66b3b7"> <a href="" style="font-size: 15px; color: #ffffff; text-decoration: none; border-radius: 5px; background-color: green; padding: 5px 5px; border: 1px solid black; display: block;">Choose Food</a> </td>
+                        </tr>
+                    </table>
+                </td>
+            </div>
+
+            
+        {% else %}
+            <div style="text-align: center;">
+                <h1>Incoming messages</h1>
+                <p class="lead">Select users and start chat...</p>
+            </div>
+        {% endif %}
+        
+
+    </div>
+    <div class="col-xs-1"></div>
+</div>
+{% endblock %}

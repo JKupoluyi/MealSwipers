@@ -3,6 +3,7 @@ from flask import flash
 from flask import g
 from flask import redirect
 from flask import render_template
+from flask import session
 from flask import request
 from flask import url_for
 from werkzeug.exceptions import abort
@@ -78,6 +79,7 @@ def sell():
 @login_required
 def view(id):
     print(id)
+    session['lid'] = id
     """Update a post if the current user is the author."""
     # user has clicked 'buy'
     # if request.method == "POST":
