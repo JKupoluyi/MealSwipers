@@ -19,6 +19,7 @@ bp = Blueprint("chat", __name__, url_prefix="/chat")
 class MessageForm(Form):    # Create Message Form
     body = StringField('', [validators.length(min=1)], render_kw={'autofocus': True})
 
+
 @bp.route('/chatting/<id>', methods=['GET', 'POST'])
 def chatting(id):
     session['lid'] = id
