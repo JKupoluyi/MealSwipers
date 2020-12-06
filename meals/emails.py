@@ -22,7 +22,7 @@ import ssl
     if(emailtype == "Swipe purchased"):
         email_body = """From: From MealSwipers <dtrisk@gmail.com>
                     To: To Person <dtrisk@gmail.com>
-                    Subject: Transaction completed on MealSwipers!
+                    Subject: Swipe Purchased on MealSwipers!
 
                     "Your swipe has been purchased through MealSwipers!  Please log in to communicate with the other party."
                     """        
@@ -30,7 +30,7 @@ import ssl
     if(emailtype == "Message waiting"):
         email_body = """From: From MealSwipers <dtrisk@gmail.com>
                     To: To Person <dtrisk@gmail.com>
-                    Subject: Transaction completed on MealSwipers!
+                    Subject: Message Waiting on MealSwipers!
 
                     "You have a message waiting on MealSwipers!  Please log in to communicate with the other user."
                     """
